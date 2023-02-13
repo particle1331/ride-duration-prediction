@@ -1,4 +1,4 @@
-from config.core import config
+from ride_duration.config.core import config
 
 
 def filter_ride_duration(df):
