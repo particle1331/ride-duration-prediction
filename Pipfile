@@ -4,20 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-scikit-learn = ">=1.0.0"
-pandas = ">=1.5.0"
 matplotlib = "*"
-seaborn = "*"
-toolz = "*"
-joblib = "*"
 strictyaml = "*"
 pydantic = "*"
+seaborn = "*"
 
 [dev-packages]
+ride-duration-prediction = {editable = true, path = "."}
+scikit-learn = ">=1.0.0"
+pandas = ">=1.5.0"
 requests = "*"
 notebook = "*"
 isort = "*"
 black = "*"
+fastparquet = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.9"

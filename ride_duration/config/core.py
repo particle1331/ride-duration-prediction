@@ -7,8 +7,8 @@ from strictyaml import YAML, load
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 ROOT = PACKAGE_ROOT.parent
 CONFIG_FILE_PATH = PACKAGE_ROOT / "config.yml"
-DATASET_DIR = ROOT / "data"
-TRAINED_MODEL_DIR = ROOT / "models"
+DATASET_DIR = PACKAGE_ROOT / "data"
+TRAINED_MODEL_DIR = PACKAGE_ROOT / "models"
 
 
 # Load core config object
@@ -18,6 +18,8 @@ class Config(BaseModel):
     TARGET_MAX: int
     RANDOM_STATE: int
     FEATURES: list[str]
+    NUMERICAL: list[str]
+    CATEGORICAL: list[str]
 
 
 with open(CONFIG_FILE_PATH, "r") as f:
