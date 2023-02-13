@@ -1,7 +1,7 @@
 from pathlib import Path
+
 from pydantic import BaseModel
 from strictyaml import YAML, load
-
 
 # Project directories
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]

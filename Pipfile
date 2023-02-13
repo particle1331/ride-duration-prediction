@@ -16,6 +16,8 @@ pydantic = "*"
 [dev-packages]
 requests = "*"
 notebook = "*"
+isort = "*"
+black = "*"
 
 [requires]
 python_version = "3.9"

@@ -24,7 +24,7 @@ def preprocess(df):
 
 def plot_duration_histograms(y_train, p_train, y_valid, p_valid):
     """Plot true and prediction distributions of ride duration."""
-    
+
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
 
     sns.histplot(p_train, ax=ax[0], label='pred', color='C0', stat='density', kde=True)
@@ -37,4 +37,4 @@ def plot_duration_histograms(y_train, p_train, y_valid, p_valid):
     ax[1].set_title("Valid")
     ax[1].legend()
 
-    fig.tight_layout();
+    fig.tight_layout()
