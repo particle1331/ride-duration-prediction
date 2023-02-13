@@ -1,4 +1,7 @@
-from ride_duration.config.core import config
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from ride_duration.config import config
 
 
 def filter_ride_duration(df):
@@ -8,9 +11,9 @@ def filter_ride_duration(df):
     return df[(df.duration >= config.TARGET_MIN) & (df.duration <= config.TARGET_MAX)]
 
 
-def dict_features(df, features):
+def convert_to_dict(df):
     """Convert dataframe to feature dicts."""
-    return df[features].to_dict(orient='records')
+    return df.to_dict(orient='records')
 
 
 def preprocess(df):
@@ -22,7 +25,7 @@ def preprocess(df):
     return df
 
 
-def plot_duration_histograms(y_train, p_train, y_valid, p_valid):
+def plot_duration_histograms(y_train, p_train, y_valid, p_valid, save=False):
     """Plot true and prediction distributions of ride duration."""
 
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
@@ -38,3 +41,4 @@ def plot_duration_histograms(y_train, p_train, y_valid, p_valid):
     ax[1].legend()
 
     fig.tight_layout()
+    return fig

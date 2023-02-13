@@ -18,6 +18,8 @@ class Config(BaseModel):
     TARGET_MAX: int
     RANDOM_STATE: int
     FEATURES: list[str]
+    NUMERICAL: list[str]
+    CATEGORICAL: list[str]
 
 
 with open(CONFIG_FILE_PATH, "r") as f:
