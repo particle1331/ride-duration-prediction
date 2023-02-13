@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fc5585919f7f5592b81e27bf3088ed914cd314c567230e98b079c39b00d81f85"
+            "sha256": "aef15a9ed156c2954f72d884093108aec93632fd3ce5f2cd2e292903b01c7277"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -92,14 +92,6 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==4.38.0"
-        },
-        "joblib": {
-            "hashes": [
-                "sha256:091138ed78f800342968c523bdde947e7a305b8594b910a0fea2ab83c3c6d385",
-                "sha256:e1cee4a79e4af22881164f218d4311f60074197fb707e082e803b61f6d137018"
-            ],
-            "index": "pypi",
-            "version": "==1.2.0"
         },
         "kiwisolver": {
             "hashes": [
@@ -467,14 +459,6 @@
             ],
             "index": "pypi",
             "version": "==1.6.2"
-        },
-        "toolz": {
-            "hashes": [
-                "sha256:2059bd4148deb1884bb0eb770a3cde70e7f954cfbbdc2285f1f2de01fd21eb6f",
-                "sha256:88c570861c440ee3f2f6037c4654613228ff40c93a6c25e0eba70d17282c6194"
-            ],
-            "index": "pypi",
-            "version": "==0.12.0"
         },
         "typing-extensions": {
             "hashes": [
@@ -1140,7 +1124,7 @@
                 "sha256:091138ed78f800342968c523bdde947e7a305b8594b910a0fea2ab83c3c6d385",
                 "sha256:e1cee4a79e4af22881164f218d4311f60074197fb707e082e803b61f6d137018"
             ],
-            "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==1.2.0"
         },
         "jsonpointer": {
@@ -2114,7 +2098,7 @@
                 "sha256:2059bd4148deb1884bb0eb770a3cde70e7f954cfbbdc2285f1f2de01fd21eb6f",
                 "sha256:88c570861c440ee3f2f6037c4654613228ff40c93a6c25e0eba70d17282c6194"
             ],
-            "index": "pypi",
+            "markers": "python_version >= '3.5'",
             "version": "==0.12.0"
         },
         "tornado": {

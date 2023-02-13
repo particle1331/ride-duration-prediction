@@ -8,7 +8,6 @@ matplotlib = "*"
 strictyaml = "*"
 pydantic = "*"
 seaborn = "*"
-joblib = "*"
 
 [dev-packages]
 ride-duration-prediction = {editable = true, path = "."}
