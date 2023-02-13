@@ -17,16 +17,39 @@ from ride_duration.config import DATASET_DIR, config
 warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 
 
-def test_pipeline():
+def prepare_dataset(filename: str):
     # Load and preprocess data
-    df = pd.read_parquet(DATASET_DIR / "green_tripdata_2021-01.parquet")
-    orig_dataset_size = df.shape[0]
+    df = pd.read_parquet(DATASET_DIR / filename)
     df = preprocess(df)
+
+    # Feature engineering
+    pass
 
     # Feature selection
     SELECTED_FEATURES = config.CATEGORICAL + config.NUMERICAL
     y = df[config.TARGET].values
     X = df[SELECTED_FEATURES]
+
+    return X, y
+
+
+def test_preprocess():
+    filename = "green_tripdata_2021-01.parquet"
+    df = pd.read_parquet(DATASET_DIR / filename)
+    orig_shape = df.shape
+    df = preprocess(df)
+
+    assert sorted(list(df.columns)) == sorted(config.FEATURES + [config.TARGET])
+    assert df.shape[0] <= orig_shape[0]
+
+
+def test_pipeline():
+    train = "green_tripdata_2021-01.parquet"
+    valid = "green_tripdata_2021-02.parquet"
+
+    # Get modeling dataset
+    X_train, y_train = prepare_dataset(train)
+    X_valid, y_valid = prepare_dataset(valid)
 
     # Fit model pipeline
     pipe = make_pipeline(
@@ -34,15 +57,16 @@ def test_pipeline():
         DictVectorizer(), 
         LinearRegression()
     )
-    pipe.fit(X, y)
+    pipe.fit(X_train, y_train)
 
     # Check performance
-    p = pipe.predict(X)
-    mse = mean_squared_error(y, p, squared=False)
+    p_train = pipe.predict(X_train)
+    p_valid = pipe.predict(X_valid)
+    mse_train = mean_squared_error(y_train, p_train, squared=False)
+    mse_valid = mean_squared_error(y_valid, p_valid, squared=False)
 
-    assert sorted(list(df.columns)) == sorted(config.FEATURES + [config.TARGET])
-    assert df.shape[0] <= orig_dataset_size
-    assert mse < 10
+    assert mse_train < 10
+    assert mse_valid < 11
 
 
 def test_plot():
