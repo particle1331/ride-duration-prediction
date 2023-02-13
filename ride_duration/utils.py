@@ -8,7 +8,7 @@ def filter_ride_duration(df):
     return df[(df.duration >= config.TARGET_MIN) & (df.duration <= config.TARGET_MAX)]
 
 
-def convert_to_dict(df, features):
+def dict_features(df, features):
     """Convert dataframe to feature dicts."""
     return df[features].to_dict(orient='records')
 
