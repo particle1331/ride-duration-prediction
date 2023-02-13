@@ -8,6 +8,8 @@ matplotlib = "*"
 strictyaml = "*"
 pydantic = "*"
 seaborn = "*"
+toolz = "*"
+joblib = "*"
 
 [dev-packages]
 ride-duration-prediction = {editable = true, path = "."}
@@ -19,6 +21,8 @@ isort = "*"
 black = "*"
 fastparquet = "*"
 pytest = "*"
+flake8 = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.9"

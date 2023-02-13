@@ -1,14 +1,14 @@
 from pathlib import Path
 
 from pydantic import BaseModel
-from strictyaml import YAML, load
+from strictyaml import load
 
 # Project directories
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 ROOT = PACKAGE_ROOT.parent
 CONFIG_FILE_PATH = PACKAGE_ROOT / "config.yml"
 DATASET_DIR = PACKAGE_ROOT / "data"
-TRAINED_MODEL_DIR = PACKAGE_ROOT / "models"
+MODEL_DIR = PACKAGE_ROOT / "models"
 
 
 # Load core config object
@@ -20,6 +20,9 @@ class Config(BaseModel):
     FEATURES: list[str]
     NUMERICAL: list[str]
     CATEGORICAL: list[str]
+    TRAIN_SAMPLE: str
+    VALID_SAMPLE: str
+    MODEL_SAMPLE: str
 
 
 with open(CONFIG_FILE_PATH, "r") as f:
