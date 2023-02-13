@@ -10,6 +10,8 @@ matplotlib = "*"
 seaborn = "*"
 toolz = "*"
 joblib = "*"
+strictyaml = "*"
+pydantic = "*"
 
 [dev-packages]
 requests = "*"

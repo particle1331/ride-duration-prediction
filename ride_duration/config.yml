@@ -1,0 +1,19 @@
+RANDOM_STATE: 0
+
+TARGET: duration
+TARGET_MIN: 1
+TARGET_MAX: 60
+
+FEATURES:
+  - PULocationID
+  - DOLocationID
+  - trip_distance
+  - lpep_dropoff_datetime
+  - lpep_pickup_datetime
+
+CATEGORICAL:
+  - PULocationID
+  - DOLocationID
+
+NUMERICAL:
+  - trip_distance
