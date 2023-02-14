@@ -36,4 +36,5 @@ def test_prepare_features():
     assert y_train is not None
     assert X_train.shape[1] == len(config.NUMERICAL)
     assert X_infer.shape[1] == len(config.NUMERICAL)
+    assert X_infer.shape[0] == df.shape[0]
     assert X_train.shape[0] < X_infer.shape[0]  # Filtered vs. Not filtered
