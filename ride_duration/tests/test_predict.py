@@ -22,8 +22,9 @@ def test_pipeline_training():
     train = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     valid = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
     
-    # Feature engineering and selection
-    transforms = [lambda data: data[config.CATEGORICAL + config.NUMERICAL]]
+    # Feature engineering and selection. 
+    # Note: selection defaults to selecting config.NUMERICAL + config.CATEGORICAL
+    transforms = ()
     X_train, y_train = prepare_features(train, transforms, train=True)
     X_valid, y_valid = prepare_features(valid, transforms, train=True)
 
@@ -54,10 +55,8 @@ def test_pipeline_inference():
     """Running inference pipeline. Same transforms as above test."""
 
     data = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
-    transforms = [lambda data: data[config.CATEGORICAL + config.NUMERICAL]]
-    
     model = joblib.load(MODEL_DIR / config.MODEL_SAMPLE)
-    X = prepare_features(data, transforms, train=False)[0]
+    X = prepare_features(data, train=False)[0]
     p = model.predict(X)
 
     assert math.isclose(p.mean(), 16.69474798410946, abs_tol=0.1)

@@ -16,7 +16,7 @@ def test_preprocess_train():
 
 
 def test_preprocess_infer():
-    df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
+    df = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
     orig_shape = df.shape
     df = preprocess(df, train=False)
 
@@ -28,13 +28,12 @@ def test_preprocess_infer():
 
 def test_prepare_features():
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
-    transforms = [lambda df: df[config.NUMERICAL]]
-    X_train, y_train = prepare_features(df, transforms, train=True)
-    X_infer, y_infer = prepare_features(df, transforms, train=False)
+    X_train, y_train = prepare_features(df, train=True)
+    X_infer, y_infer = prepare_features(df, train=False)
 
     assert y_infer is None
     assert y_train is not None
-    assert X_train.shape[1] == len(config.NUMERICAL)
-    assert X_infer.shape[1] == len(config.NUMERICAL)
+    assert X_train.shape[1] == len(config.NUMERICAL + config.CATEGORICAL)
+    assert X_infer.shape[1] == len(config.NUMERICAL + config.CATEGORICAL)
     assert X_infer.shape[0] == df.shape[0]
     assert X_train.shape[0] < X_infer.shape[0]  # Filtered vs. Not filtered
