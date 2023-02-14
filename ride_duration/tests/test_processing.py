@@ -16,7 +16,7 @@ def test_preprocess_train():
 
 
 def test_preprocess_infer():
-    df = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
+    df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     orig_shape = df.shape
     df = preprocess(df, train=False)
 
