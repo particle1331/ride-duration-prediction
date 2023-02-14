@@ -10,3 +10,18 @@ skip-string-normalization = true
 [tool.isort]
 multi_line_output = 3
 length_sort = true
+
+[tool.pylint.messages_control]
+max-line-length = 88
+disable = [
+    "invalid-name",
+    "unused-argument",
+    "wrong-import-position",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "unspecified-encoding",
+    "no-name-in-module",
+    "missing-docstring",
+    "wrong-import-order",
+    "trailing-whitespace",
+]

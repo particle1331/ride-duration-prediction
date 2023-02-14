@@ -8,21 +8,13 @@ def filter_ride_duration(df):
     """Create target column and filter outliers."""
     df[config.TARGET] = df.lpep_dropoff_datetime - df.lpep_pickup_datetime
     df[config.TARGET] = df.duration.dt.total_seconds() / 60
-    return df[(df.duration >= config.TARGET_MIN) & (df.duration <= config.TARGET_MAX)]
+    df = df[(df.duration >= config.TARGET_MIN) & (df.duration <= config.TARGET_MAX)]
+    return df
 
 
 def convert_to_dict(df):
     """Convert dataframe to feature dicts."""
     return df.to_dict(orient='records')
-
-
-def preprocess(df):
-    """Preprocess data for training."""
-    df = df[config.FEATURES]
-    df = filter_ride_duration(df)
-    df[config.CATEGORICAL] = df[config.CATEGORICAL].astype(str)
-    df[config.NUMERICAL] = df[config.NUMERICAL].astype(float)
-    return df
 
 
 def plot_duration_histograms(y_train, p_train, y_valid, p_valid, save=False):
