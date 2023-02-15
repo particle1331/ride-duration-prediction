@@ -18,8 +18,8 @@ class Config(BaseModel):
     TARGET_MAX: int
     RANDOM_STATE: int
     FEATURES: list[str]
-    NUMERICAL: list[str]
-    CATEGORICAL: list[str]
+    NUM_FEATURES: list[str]
+    CAT_FEATURES: list[str]
     TRAIN_SAMPLE: str
     VALID_SAMPLE: str
     MODEL_SAMPLE: str

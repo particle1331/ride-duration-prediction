@@ -22,11 +22,9 @@ def test_pipeline_training():
     train = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     valid = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
     
-    # Feature engineering and selection. 
-    # Note: selection defaults to selecting config.NUMERICAL + config.CATEGORICAL
-    transforms = ()
-    X_train, y_train = prepare_features(train, transforms, train=True)
-    X_valid, y_valid = prepare_features(valid, transforms, train=True)
+    # Note: Feature selection defaults to config.FEATURES
+    X_train, y_train = prepare_features(train, train=True)
+    X_valid, y_valid = prepare_features(valid, train=True)
 
     # Fit model pipeline (all trainable here)
     pipe = make_pipeline(

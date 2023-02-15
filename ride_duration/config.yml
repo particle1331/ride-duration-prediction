@@ -12,12 +12,10 @@ FEATURES:
   - PULocationID
   - DOLocationID
   - trip_distance
-  - lpep_dropoff_datetime
-  - lpep_pickup_datetime
 
-CATEGORICAL:
+CAT_FEATURES:
   - PULocationID
   - DOLocationID
 
-NUMERICAL:
+NUM_FEATURES:
   - trip_distance
