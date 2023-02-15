@@ -16,7 +16,7 @@ def test_preprocess_train():
 
 
 def test_preprocess_infer():
-    df = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
+    df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     orig_shape = df.shape
     df = preprocess(df, train=False)
 
@@ -29,7 +29,7 @@ def test_preprocess_infer():
 def test_prepare_features():
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     X_train, y_train = prepare_features(df, train=True)
-    X_infer, y_infer = prepare_features(df, train=False)
+    X_infer, y_infer = prepare_features(df)
 
     assert y_infer is None
     assert y_train is not None
