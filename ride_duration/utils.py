@@ -17,7 +17,7 @@ def convert_to_dict(df):
     return df.to_dict(orient='records')
 
 
-def plot_duration_histograms(y_train, p_train, y_valid, p_valid, save=False):
+def plot_duration_histograms(y_train, p_train, y_valid, p_valid):
     """Plot true and prediction distributions of ride duration."""
 
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))

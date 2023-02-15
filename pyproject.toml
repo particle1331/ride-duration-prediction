@@ -15,7 +15,6 @@ length_sort = true
 max-line-length = 88
 disable = [
     "invalid-name",
-    "unused-argument",
     "wrong-import-position",
     "missing-class-docstring",
     "missing-function-docstring",
