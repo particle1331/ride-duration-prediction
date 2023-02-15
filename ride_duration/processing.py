@@ -6,7 +6,7 @@ from ride_duration.config import config
 
 
 def preprocess(df: pd.DataFrame, train: bool):
-    """Fix types. Drop irrelevant data. Add and filter target column if train."""
+    """Process and clean data for feature transformation."""
 
     df[config.CAT_FEATURES] = df[config.CAT_FEATURES].astype(str)
     df[config.NUM_FEATURES] = df[config.NUM_FEATURES].astype(float)
@@ -19,7 +19,7 @@ def preprocess(df: pd.DataFrame, train: bool):
 
 
 def prepare_features(df: pd.DataFrame, transforms: tuple = (), train: bool = False):
-    """Prepare data for model consumption at inference."""
+    """Prepare data for model consumption."""
     
     df = preprocess(df, train=train)
     if train:
