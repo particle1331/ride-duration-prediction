@@ -56,7 +56,7 @@ def test_pipeline_inference():
 
     data = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
     model = joblib.load(MODEL_DIR / config.MODEL_SAMPLE)
-    X = prepare_features(data, train=False)[0]
+    X = prepare_features(data)[0]
     p = model.predict(X)
 
     assert math.isclose(p.mean(), 16.69474798410946, abs_tol=0.1)

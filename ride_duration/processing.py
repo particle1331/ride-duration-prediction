@@ -5,7 +5,7 @@ from ride_duration.utils import filter_ride_duration
 from ride_duration.config import config
 
 
-def preprocess(df: pd.DataFrame, train: bool = True):
+def preprocess(df: pd.DataFrame, train: bool):
     """Fix types. Drop irrelevant data. Add and filter target column if train."""
 
     df[config.CATEGORICAL] = df[config.CATEGORICAL].astype(str)
@@ -15,7 +15,7 @@ def preprocess(df: pd.DataFrame, train: bool = True):
     return f(df)
 
 
-def prepare_features(df: pd.DataFrame, transforms: tuple = (), train: bool = True):
+def prepare_features(df: pd.DataFrame, transforms: tuple = (), train: bool = False):
     """Prepare data for model consumption at inference."""
     
     if not transforms:
