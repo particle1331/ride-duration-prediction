@@ -44,12 +44,13 @@ def test_transforms():
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
 
     # Note that order matters:
+    select_features = config.NUM_FEATURES[:1] + config.CAT_FEATURES[:1]
     transforms = [
-        lambda x: x[config.NUM_FEATURES[:1] + config.CAT_FEATURES[:1]],
+        lambda x: x[select_features],
         lambda x: convert_to_dict(x)
     ]
-    X, y = prepare_features(df, transforms=transforms)
+    X, _ = prepare_features(df, transforms=transforms)
 
     assert len(X) == len(df)
     assert isinstance(X[0], dict)
-    assert sorted(X[0].keys()) == sorted(config.NUM_FEATURES[:1] + config.CAT_FEATURES[:1])
+    assert sorted(X[0].keys()) == sorted(select_features)

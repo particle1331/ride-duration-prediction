@@ -23,6 +23,7 @@ fastparquet = "*"
 pytest = "*"
 flake8 = "*"
 pylint = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.9"

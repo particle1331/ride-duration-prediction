@@ -24,4 +24,5 @@ disable = [
     "missing-docstring",
     "wrong-import-order",
     "trailing-whitespace",
+    "too-few-public-methods"
 ]
