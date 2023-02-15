@@ -1,6 +1,6 @@
 import os
 
-from ride_duration.config import DATASET_DIR, MODEL_DIR, config
+from ride_duration.config import MODEL_DIR, DATASET_DIR, config
 
 
 def test():

@@ -1,8 +1,8 @@
 import pandas as pd
 
+from ride_duration.utils import convert_to_dict
 from ride_duration.config import DATASET_DIR, config
 from ride_duration.processing import preprocess, prepare_features
-from ride_duration.utils import convert_to_dict
 
 
 def test_preprocess_train():
