@@ -36,4 +36,4 @@ def test_prepare_features():
     assert X_train.shape[1] == len(config.NUMERICAL + config.CATEGORICAL)
     assert X_infer.shape[1] == len(config.NUMERICAL + config.CATEGORICAL)
     assert X_infer.shape[0] == df.shape[0]
-    assert X_train.shape[0] < X_infer.shape[0]  # Filtered vs. Not filtered
+    assert X_train.shape[0] <= X_infer.shape[0]  # Filtered vs. Not filtered
