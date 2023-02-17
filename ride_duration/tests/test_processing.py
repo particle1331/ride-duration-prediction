@@ -25,7 +25,7 @@ def test_preprocess_infer():
     assert df.shape[0] == orig_shape[0]
     assert df.shape[1] == len(config.FEATURES)
     assert config.TARGET not in df.columns
-    
+
 
 def test_prepare_features():
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)

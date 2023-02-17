@@ -1,24 +1,20 @@
-.PHONY: clean-pyc clean-build clean
-
-clean: clean-build clean-pyc clean-test
+clean: clean-test clean-build
+	find . | grep ".vscode" | xargs rm -rf
+	find . | grep ".DS_Store" | xargs rm
+	find . | grep "__pycache__" | xargs rm -rf
+	find . | grep ".ipynb_checkpoints" | xargs rm -rf
 
 clean-build:
-	rm -fr build/
-	rm -fr dist/
-	rm -fr .eggs/
-	find . -name '*.egg-info' -exec rm -fr {} +
-	find . -name '*.egg' -exec rm -f {} +
-
-clean-pyc:
-	find . -type f -name "*.DS_Store" -ls -delete
-	find . | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
-	find . | grep -E ".pytest_cache" | xargs rm -rf
-	find . | grep -E ".ipynb_checkpoints" | xargs rm -rf
-	find . | grep -E ".vscode" | xargs rm -rf
+	rm -rf build/
+	rm -rf dist/
+	rm -rf .eggs/
+	find . | grep ".egg" | xargs rm -rf
+	find . | grep ".egg-info" | xargs rm -rf
 
 clean-test:
 	rm -f .coverage
-	rm -fr htmlcov/
+	rm -rf htmlcov/
+	find . | grep ".pytest_cache" | xargs rm -rf
 
 lint:
 	pylint --recursive=y ride_duration

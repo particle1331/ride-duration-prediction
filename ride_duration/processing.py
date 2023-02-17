@@ -10,7 +10,7 @@ def preprocess(df: pd.DataFrame, train: bool):
 
     df[config.CAT_FEATURES] = df[config.CAT_FEATURES].astype(str)
     df[config.NUM_FEATURES] = df[config.NUM_FEATURES].astype(float)
-    
+
     if train:
         df = filter_ride_duration(df)
         return df[config.FEATURES + [config.TARGET]]
@@ -20,7 +20,7 @@ def preprocess(df: pd.DataFrame, train: bool):
 
 def prepare_features(df: pd.DataFrame, transforms: tuple = (), train: bool = False):
     """Prepare data for model consumption."""
-    
+
     df = preprocess(df, train=train)
     if train:
         y = df[config.TARGET].values if train else None
