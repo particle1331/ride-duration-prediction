@@ -21,7 +21,7 @@ def test_pipeline_training():
     # Load raw dataset
     train = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     valid = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
-    
+
     # Note: Feature selection defaults to config.FEATURES
     X_train, y_train = prepare_features(train, train=True)
     X_valid, y_valid = prepare_features(valid, train=True)
