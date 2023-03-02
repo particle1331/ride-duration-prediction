@@ -8,22 +8,22 @@ matplotlib = "*"
 strictyaml = "*"
 pydantic = "*"
 seaborn = "*"
+pandas = ">=1.5.0"
 toolz = "*"
-joblib = "*"
 
 [dev-packages]
 ride-duration-prediction = {editable = true, path = "."}
 scikit-learn = ">=1.0.0"
-pandas = ">=1.5.0"
+fastparquet = "*"
 requests = "*"
 notebook = "*"
-isort = "*"
-black = "*"
-fastparquet = "*"
+coverage = "*"
+joblib = "*"
 pytest = "*"
 flake8 = "*"
 pylint = "*"
-coverage = "*"
+isort = "*"
+black = "*"
 
 [requires]
 python_version = "3.9"
