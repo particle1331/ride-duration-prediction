@@ -1,0 +1,21 @@
+RANDOM_STATE: 0
+
+TARGET: duration
+TARGET_MIN: 1
+TARGET_MAX: 60
+
+TRAIN_SAMPLE: "green_tripdata_2021-01.parquet"
+VALID_SAMPLE: "green_tripdata_2021-02.parquet"
+MODEL_SAMPLE: "model_pipe.pkl"
+
+FEATURES:
+  - PULocationID
+  - DOLocationID
+  - trip_distance
+
+CAT_FEATURES:
+  - PULocationID
+  - DOLocationID
+
+NUM_FEATURES:
+  - trip_distance
