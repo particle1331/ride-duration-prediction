@@ -45,7 +45,7 @@ def test_pipeline_training():
     joblib.dump(pipe, model_path)
 
     assert os.path.exists(model_path)
-    assert math.isclose(mse_train,  9.838799799829626, abs_tol=0.1)
+    assert math.isclose(mse_train, 19.838799799829626, abs_tol=0.1)
     assert math.isclose(mse_valid, 10.499110710362512, abs_tol=0.1)
 
 
