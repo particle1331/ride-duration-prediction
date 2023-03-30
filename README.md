@@ -1,4 +1,5 @@
 # ride-duration-prediction
 
+[![tests](https://github.com/particle1331/ride-duration-prediction/actions/workflows/tests.yml/badge.svg)](https://github.com/particle1331/ride-duration-prediction/actions/workflows/tests.yml)
+
 Modeling package for production applications.
-See [this article](https://particle1331.github.io/ok-transformer/nb/mlops/01-package.html) for a guide to this repo.
