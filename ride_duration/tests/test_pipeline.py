@@ -29,8 +29,11 @@ def test_pipeline_training():
 
     # Fit model pipeline (all trainable here)
     pipe = make_pipeline(
-        FunctionTransformer(convert_to_dict), DictVectorizer(), LinearRegression()
+        FunctionTransformer(convert_to_dict), 
+        DictVectorizer(), 
+        LinearRegression()
     )
+
     pipe.fit(X_train, y_train)
 
     # Check performance

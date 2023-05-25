@@ -6,6 +6,7 @@ from ride_duration.processing import preprocess, prepare_features
 
 
 def test_preprocess_train():
+
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     orig_shape = df.shape
     df = preprocess(df, train=True)
@@ -17,6 +18,7 @@ def test_preprocess_train():
 
 
 def test_preprocess_infer():
+
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     orig_shape = df.shape
     df = preprocess(df, train=False)
@@ -28,6 +30,7 @@ def test_preprocess_infer():
 
 
 def test_prepare_features():
+
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
     X_train, y_train = prepare_features(df, train=True)
     X_infer, y_infer = prepare_features(df)
@@ -41,6 +44,7 @@ def test_prepare_features():
 
 
 def test_transforms():
+    
     df = pd.read_parquet(DATASET_DIR / config.TRAIN_SAMPLE)
 
     # Note that order matters:
