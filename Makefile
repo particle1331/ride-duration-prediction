@@ -27,5 +27,5 @@ format:
 	black .
 
 coverage:
-	coverage run -m pytest -vv ride_duration
+	coverage run -m pytest ride_duration
 	coverage report -m
