@@ -24,12 +24,13 @@ def plot_duration_histograms(y_train, p_train, y_valid, p_valid):
 
     sns.histplot(p_train, ax=ax[0], label='pred', color='C0', stat='density', kde=True)
     sns.histplot(y_train, ax=ax[0], label='true', color='C1', stat='density', kde=True)
-    ax[0].set_title("Train")
-    ax[0].legend()
 
     sns.histplot(p_valid, ax=ax[1], label='pred', color='C0', stat='density', kde=True)
     sns.histplot(y_valid, ax=ax[1], label='true', color='C1', stat='density', kde=True)
+
+    ax[0].set_title("Train")
     ax[1].set_title("Valid")
+    ax[0].legend()
     ax[1].legend()
 
     fig.tight_layout()

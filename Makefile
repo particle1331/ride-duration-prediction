@@ -20,12 +20,12 @@ lint:
 	pylint --recursive=y ride_duration
 
 test:
-	pytest -W ignore ride_duration
+	pytest -W ignore -vv ride_duration
 
 format:
-	black .
 	isort .
+	black .
 
 coverage:
-	coverage run -m pytest ride_duration
+	coverage run -m pytest -vv ride_duration
 	coverage report -m

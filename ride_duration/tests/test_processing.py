@@ -45,10 +45,7 @@ def test_transforms():
 
     # Note that order matters:
     select_features = config.NUM_FEATURES[:1] + config.CAT_FEATURES[:1]
-    transforms = [
-        lambda x: x[select_features],
-        lambda x: convert_to_dict(x)
-    ]
+    transforms = [lambda x: x[select_features], lambda x: convert_to_dict(x)]
     X, _ = prepare_features(df, transforms=transforms)
 
     assert len(X) == len(df)
