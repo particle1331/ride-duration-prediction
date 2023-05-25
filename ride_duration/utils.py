@@ -6,11 +6,11 @@ from ride_duration.config import config
 
 def filter_ride_duration(df):
     """Create target column and filter outliers."""
-    
+
     df[config.TARGET] = df.lpep_dropoff_datetime - df.lpep_pickup_datetime
     df[config.TARGET] = df.duration.dt.total_seconds() / 60
     df = df[(df.duration >= config.TARGET_MIN) & (df.duration <= config.TARGET_MAX)]
-    
+
     return df
 
 

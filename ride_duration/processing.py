@@ -22,7 +22,7 @@ def prepare_features(df: pd.DataFrame, transforms: tuple = (), train: bool = Fal
     """Prepare data for model consumption."""
 
     df = preprocess(df, train=train)
-    
+
     if train:
         y = df[config.TARGET].values if train else None
         X = df.drop([config.TARGET], axis=1)
