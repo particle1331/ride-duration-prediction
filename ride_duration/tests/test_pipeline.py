@@ -1,10 +1,11 @@
 import os
 import math
+import pytest
 
 import numpy as np
 import joblib
 import pandas as pd
-import pytest
+
 from sklearn.metrics import mean_squared_error
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LinearRegression
@@ -37,7 +38,7 @@ def test_pipeline_training():
     # Check performance
     p_train = pipe.predict(X_train)
     p_valid = pipe.predict(X_valid)
-    
+
     mse_train = mean_squared_error(y_train, p_train, squared=False)
     mse_valid = mean_squared_error(y_valid, p_valid, squared=False)
 
