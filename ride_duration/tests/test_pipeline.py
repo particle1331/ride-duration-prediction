@@ -37,6 +37,7 @@ def test_pipeline_training():
     # Check performance
     p_train = pipe.predict(X_train)
     p_valid = pipe.predict(X_valid)
+    
     mse_train = mean_squared_error(y_train, p_train, squared=False)
     mse_valid = mean_squared_error(y_valid, p_valid, squared=False)
 
@@ -54,7 +55,8 @@ def test_pipeline_inference():
 
     data = pd.read_parquet(DATASET_DIR / config.VALID_SAMPLE)
     model = joblib.load(MODEL_DIR / config.MODEL_SAMPLE)
-    X = prepare_features(data)[0]
-    p = model.predict(X)
 
-    assert math.isclose(p.mean(), 15.0, abs_tol=10.0)
+    X = prepare_features(data)[0]
+    pred = model.predict(X)
+
+    assert math.isclose(pred.mean(), 16.0, abs_tol=5.0)
