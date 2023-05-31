@@ -1,7 +1,5 @@
-import pandas as pd
-
 from ride_duration.utils import convert_to_dict
-from ride_duration.config import DATASET_DIR, config
+from ride_duration.config import config
 from ride_duration.processing import preprocess, prepare_features
 
 
@@ -41,7 +39,7 @@ def test_transforms(train):
     select_features = config.NUM_FEATURES[:1] + config.CAT_FEATURES[:1]
     transforms = [
         lambda x: x[select_features],
-        lambda x: convert_to_dict(x),
+        convert_to_dict,
     ]  # order matters
     X, _ = prepare_features(train, transforms=transforms)
 
