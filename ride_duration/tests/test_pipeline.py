@@ -1,18 +1,12 @@
-import os
 import math
 
-import numpy as np
-import joblib
-import pandas as pd
-import pytest
 from sklearn.metrics import mean_squared_error
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.feature_extraction import DictVectorizer
 
-from ride_duration.utils import convert_to_dict, plot_duration_histograms
-from ride_duration.config import MODEL_DIR, DATASET_DIR, config
+from ride_duration.utils import convert_to_dict
 from ride_duration.processing import prepare_features
 
 
