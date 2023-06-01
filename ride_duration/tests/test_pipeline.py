@@ -24,11 +24,11 @@ def test_pipeline_training(train, valid):
     pipe.fit(X_train, y_train)
 
     # Check performance
-    pred_train = pipe.predict(X_train)
-    pred_valid = pipe.predict(X_valid)
+    yp_train = pipe.predict(X_train)
+    yp_valid = pipe.predict(X_valid)
 
-    mse_train = mean_squared_error(y_train, pred_train, squared=False)
-    mse_valid = mean_squared_error(y_valid, pred_valid, squared=False)
+    mse_train = mean_squared_error(y_train, yp_train, squared=False)
+    mse_valid = mean_squared_error(y_valid, yp_valid, squared=False)
 
     assert mse_train <= 12.0
     assert mse_valid <= 15.0
@@ -38,6 +38,6 @@ def test_pipeline_inference(model, valid):
     """Running inference pipeline. Same transforms as above test."""
 
     X = prepare_features(valid)[0]
-    pred = model.predict(X)
+    yp = model.predict(X)
 
-    assert math.isclose(pred.mean(), 16.0, abs_tol=5.0)
+    assert math.isclose(yp.mean(), 16.0, abs_tol=5.0)

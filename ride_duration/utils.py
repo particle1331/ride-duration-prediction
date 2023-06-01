@@ -19,16 +19,16 @@ def convert_to_dict(df):
     return df.to_dict(orient='records')
 
 
-def plot_duration_histograms(y_train, p_train, y_valid, p_valid):
+def plot_duration_histograms(y_train, yp_train, y_valid, yp_valid):
     """Plot true and prediction distributions of ride duration."""
 
     fig, ax = plt.subplots(1, 2, figsize=(8, 4))
 
-    sns.histplot(p_train, ax=ax[0], label='pred', color='C0', stat='density', kde=True)
-    sns.histplot(y_train, ax=ax[0], label='true', color='C1', stat='density', kde=True)
+    sns.histplot(yp_train, ax=ax[0], label='pred', color='C0', stat='density', kde=True)
+    sns.histplot(y_train,  ax=ax[0], label='true', color='C1', stat='density', kde=True)
 
-    sns.histplot(p_valid, ax=ax[1], label='pred', color='C0', stat='density', kde=True)
-    sns.histplot(y_valid, ax=ax[1], label='true', color='C1', stat='density', kde=True)
+    sns.histplot(yp_valid, ax=ax[1], label='pred', color='C0', stat='density', kde=True)
+    sns.histplot(y_valid,  ax=ax[1], label='true', color='C1', stat='density', kde=True)
 
     ax[0].set_title("Train")
     ax[1].set_title("Valid")
