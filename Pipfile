@@ -11,8 +11,7 @@ seaborn = "*"
 pandas = ">=1.5.0"
 
 [dev-packages]
-ride-duration-prediction = {editable = true, path = "."}
-scikit-learn = ">=1.0.0"
+scikit-learn = "*"
 fastparquet = "*"
 requests = "*"
 notebook = "*"
@@ -23,6 +22,12 @@ flake8 = "*"
 pylint = "*"
 isort = "*"
 black = "*"
+ride-duration-prediction = {editable = true, path = "."}
+mlflow = "*"
+optuna = "*"
+toolz = "*"
+xgboost = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.9"

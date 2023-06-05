@@ -49,7 +49,7 @@ def convert_to_dict(df):
     return df.to_dict(orient="records")
 
 
-def feature_pipeline(transforms: list):
+def feature_pipeline(transforms: tuple = ()):
     def preprocessor(df):
         return compose(*transforms[::-1])(df)
 
