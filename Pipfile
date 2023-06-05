@@ -9,7 +9,6 @@ strictyaml = "*"
 pydantic = "*"
 seaborn = "*"
 pandas = ">=1.5.0"
-toolz = "*"
 
 [dev-packages]
 ride-duration-prediction = {editable = true, path = "."}
