@@ -6,8 +6,12 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.feature_extraction import DictVectorizer
 
-from ride_duration.utils import convert_to_dict
 from ride_duration.processing import preprocess
+
+
+def convert_to_dict(df):
+    """Convert dataframe to feature dicts."""
+    return df.to_dict(orient='records')
 
 
 def test_pipeline_training(train, valid):

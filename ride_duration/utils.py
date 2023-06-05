@@ -14,11 +14,6 @@ def filter_ride_duration(df):
     return df
 
 
-def convert_to_dict(df):
-    """Convert dataframe to feature dicts."""
-    return df.to_dict(orient='records')
-
-
 def plot_duration_histograms(y_train, yp_train, y_valid, yp_valid):
     """Plot true and prediction distributions of ride duration."""
 
