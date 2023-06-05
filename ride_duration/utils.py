@@ -4,14 +4,17 @@ import matplotlib.pyplot as plt
 from ride_duration.config import config
 
 
-def filter_ride_duration(df):
-    """Create target column and filter outliers."""
-
+def create_target_column(df):
+    "Create target column."
     df[config.TARGET] = df.lpep_dropoff_datetime - df.lpep_pickup_datetime
     df[config.TARGET] = df.duration.dt.total_seconds() / 60
-    df = df[(df.duration >= config.TARGET_MIN) & (df.duration <= config.TARGET_MAX)]
-
     return df
+
+
+def filter_ride_duration(df):
+    """Filter rides with target outliers."""
+    mask = (df.duration >= config.TARGET_MIN) & (df.duration <= config.TARGET_MAX)
+    return df[mask]
 
 
 def plot_duration_histograms(y_train, yp_train, y_valid, yp_valid):

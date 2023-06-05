@@ -15,10 +15,8 @@ def convert_to_dict(df):
 
 
 def test_pipeline_training(train, valid):
-    """Run training pipeline."""
-
-    X_train, y_train = preprocess(train, train=True)
-    X_valid, y_valid = preprocess(valid, train=True)
+    X_train, y_train = preprocess(train, target=True, filter_target=True)
+    X_valid, y_valid = preprocess(valid, target=True, filter_target=True)
 
     # Fit model pipeline (stateful transforms + model)
     pipe = make_pipeline(
@@ -41,9 +39,7 @@ def test_pipeline_training(train, valid):
 
 
 def test_pipeline_inference(model, valid):
-    """Running inference pipeline. Same transforms as above test."""
-
-    X = preprocess(valid, train=False)
+    X = preprocess(valid, target=False)
     yp = model.predict(X)
 
     assert math.isclose(yp.mean(), 16.0, abs_tol=5.0)
