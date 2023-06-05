@@ -1,20 +1,25 @@
 import pandas as pd
 
-from ride_duration.utils import filter_ride_duration
+from ride_duration.utils import create_target_column, filter_ride_duration
 from ride_duration.config import config
 
 
-def preprocess(df: pd.DataFrame, train: bool):
+def preprocess(data: pd.DataFrame, target: bool, filter_target: bool = False):
     """Process and clean data for feature transformation."""
 
-    df[config.CAT_FEATURES] = df[config.CAT_FEATURES].astype(str)
-    df[config.NUM_FEATURES] = df[config.NUM_FEATURES].astype(float)
+    data[config.CAT_FEATURES] = data[config.CAT_FEATURES].astype(str)
+    data[config.NUM_FEATURES] = data[config.NUM_FEATURES].astype(float)
 
-    if train:
-        df = filter_ride_duration(df)
-        X = df[config.FEATURES]
-        y = df[config.TARGET].values
+    if target:
+        data = create_target_column(data)
+        if filter_target:
+            data = filter_ride_duration(data)
+
+        X = data[config.FEATURES]
+        y = data[config.TARGET].values
+
         return X, y
+
     else:
-        X = df[config.FEATURES]
+        X = data[config.FEATURES]
         return X
