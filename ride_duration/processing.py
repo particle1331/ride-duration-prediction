@@ -1,5 +1,4 @@
 import pandas as pd
-from toolz import compose
 
 from ride_duration.utils import filter_ride_duration
 from ride_duration.config import config
@@ -13,22 +12,9 @@ def preprocess(df: pd.DataFrame, train: bool):
 
     if train:
         df = filter_ride_duration(df)
-        return df[config.FEATURES + [config.TARGET]]
+        X = df[config.FEATURES]
+        y = df[config.TARGET].values
+        return X, y
     else:
-        return df[config.FEATURES]
-
-
-def prepare_features(df: pd.DataFrame, transforms: tuple = (), train: bool = False):
-    """Prepare data for model consumption."""
-
-    df = preprocess(df, train=train)
-
-    if train:
-        y = df[config.TARGET].values if train else None
-        X = df.drop([config.TARGET], axis=1)
-    else:
-        y = None
-        X = df
-
-    X = compose(*transforms[::-1])(X)
-    return X, y
+        X = df[config.FEATURES]
+        return X

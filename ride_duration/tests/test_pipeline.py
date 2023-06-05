@@ -6,19 +6,25 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.feature_extraction import DictVectorizer
 
-from ride_duration.utils import convert_to_dict
-from ride_duration.processing import prepare_features
+from ride_duration.processing import preprocess
+
+
+def convert_to_dict(df):
+    """Convert dataframe to feature dicts."""
+    return df.to_dict(orient='records')
 
 
 def test_pipeline_training(train, valid):
     """Run training pipeline."""
 
-    X_train, y_train = prepare_features(train, train=True)
-    X_valid, y_valid = prepare_features(valid, train=True)
+    X_train, y_train = preprocess(train, train=True)
+    X_valid, y_valid = preprocess(valid, train=True)
 
-    # Fit model pipeline (transforms (trainable) + model)
+    # Fit model pipeline (stateful transforms + model)
     pipe = make_pipeline(
-        FunctionTransformer(convert_to_dict), DictVectorizer(), LinearRegression()
+        FunctionTransformer(convert_to_dict),
+        DictVectorizer(),
+        LinearRegression(),
     )
 
     pipe.fit(X_train, y_train)
@@ -37,7 +43,7 @@ def test_pipeline_training(train, valid):
 def test_pipeline_inference(model, valid):
     """Running inference pipeline. Same transforms as above test."""
 
-    X = prepare_features(valid)[0]
+    X = preprocess(valid, train=False)
     yp = model.predict(X)
 
     assert math.isclose(yp.mean(), 16.0, abs_tol=5.0)
