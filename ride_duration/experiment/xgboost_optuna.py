@@ -4,19 +4,19 @@ import joblib
 import mlflow
 import optuna
 from toolz import compose
-from utils import (
-    fixtures,
-    add_pudo_column,
-    feature_pipeline,
-    feature_selector,
-    setup_experiment,
-)
 from xgboost import XGBRegressor
 from sklearn.metrics import mean_squared_error
 
 from ride_duration.utils import plot_duration_histograms
 from ride_duration.config import config
 from ride_duration.processing import preprocess
+from ride_duration.experiment.utils import (
+    fixtures,
+    add_pudo_column,
+    feature_pipeline,
+    feature_selector,
+    setup_experiment,
+)
 
 setup_experiment()
 data = fixtures()
