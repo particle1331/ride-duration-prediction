@@ -1,42 +1,34 @@
-import time
+import os
 
 import mlflow
 import optuna
 from xgboost import XGBRegressor
-from sklearn.metrics import mean_squared_error
 
-from ride_duration.utils import plot_duration_histograms
 from ride_duration.processing import preprocess
 from ride_duration.experiment.utils import (
-    fixtures,
+    data_dict,
     add_pudo_column,
     feature_pipeline,
     feature_selector,
     setup_experiment,
+    mlflow_default_logging,
 )
 
 setup_experiment()
-data = fixtures()
 mlflow.xgboost.autolog()
+data = data_dict(debug=int(os.environ["DEBUG"]))
 
 
 def run(params, pudo: bool):
     with mlflow.start_run():
-        train_data = data["train_data"]
-        valid_data = data["valid_data"]
-        train_data_path = data["train_data_path"]
-        valid_data_path = data["valid_data_path"]
-
         # Preprocessing
-        X_train, y_train = preprocess(train_data, target=True, filter_target=True)
-        X_valid, y_valid = preprocess(valid_data, target=True, filter_target=True)
-
-        # Feature engineering + selection
-        transforms = []
-        if pudo:
-            transforms.extend([add_pudo_column, feature_selector])
+        train = data["train_data"]
+        valid = data["valid_data"]
+        X_train, y_train = preprocess(train, target=True, filter_target=True)
+        X_valid, y_valid = preprocess(valid, target=True, filter_target=True)
 
         # Fit feature pipe
+        transforms = [add_pudo_column, feature_selector] if pudo else []
         feature_pipe = feature_pipeline(transforms)
         X_train = feature_pipe.fit_transform(X_train)
         X_valid = feature_pipe.transform(X_valid)
@@ -49,50 +41,22 @@ def run(params, pudo: bool):
             eval_set=[(X_valid, y_valid)],
         )
 
-        # Compute metrics
-        start_time = time.time()
-        yp_train = model.predict(X_train)
-        yp_valid = model.predict(X_valid)
-        predict_time = time.time() - start_time
-
-        rmse_train = mean_squared_error(y_train, yp_train, squared=False)
-        rmse_valid = mean_squared_error(y_valid, yp_valid, squared=False)
-
-        fig = plot_duration_histograms(y_train, yp_train, y_valid, yp_valid)
-
-        # MLflow logging
-        mlflow.set_tag("author", "particle")
-        mlflow.set_tag("model", "xgboost")
-
-        mlflow.log_param("pudo", pudo)
-        mlflow.log_param("train_data_path", train_data_path)
-        mlflow.log_param("valid_data_path", valid_data_path)
-
-        mlflow.log_metric("rmse_train", rmse_train)
-        mlflow.log_metric("rmse_valid", rmse_valid)
-
-        mlflow.log_metric(
-            "inference_time", predict_time / (len(yp_train) + len(yp_valid))
-        )
-
-        mlflow.log_figure(fig, "plot.svg")
-
-        # Log feature pipeline as artifact
+        # Default logging + logging feature_pipe
+        MODEL_TAG = "xgboost"
+        args = [model, MODEL_TAG, data, X_train, y_train, X_valid, y_valid]
+        logs = mlflow_default_logging(*args)
         mlflow.sklearn.log_model(feature_pipe, "feature_pipe")
 
-    return rmse_valid
+    return logs["rmse_valid"]
 
 
 def objective(trial, pudo: bool):
+    # fmt: off
     params = {
-        "n_estimators": trial.suggest_int("n_estimators", 1, 10, step=1) * 100,
-        "max_depth": trial.suggest_int("max_depth", 4, 100),
-        "learning_rate": trial.suggest_float("learning_rate", 1e-3, 1, log=True),
-        "reg_alpha": trial.suggest_float("reg_alpha", 1e-5, 0.1, log=True),
-        "reg_lambda": trial.suggest_float("reg_lambda", 1e-6, 0.1, log=True),
-        "min_child_weight": trial.suggest_float(
-            "min_child_weight", 0.1, 1000, log=True
-        ),
+        "max_depth":        trial.suggest_int("max_depth", 4, 100),
+        "n_estimators":     trial.suggest_int("n_estimators", 1, 10, step=1) * 100,
+        "learning_rate":    trial.suggest_float("learning_rate", 1e-3, 1, log=True),
+        "min_child_weight": trial.suggest_float("min_child_weight", 0.1, 1000, log=True),
         "objective": "reg:squarederror",
         "seed": 42,
     }
