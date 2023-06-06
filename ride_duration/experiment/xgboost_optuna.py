@@ -19,7 +19,7 @@ mlflow.xgboost.autolog()
 data = data_dict(debug=int(os.environ["DEBUG"]))
 
 
-def run(params, pudo: bool):
+def run(params: dict, pudo: int):
     with mlflow.start_run():
         # Preprocessing
         train = data["train_data"]
@@ -41,16 +41,19 @@ def run(params, pudo: bool):
             eval_set=[(X_valid, y_valid)],
         )
 
-        # Default logging + logging feature_pipe
+        # Default mlflow logs
         MODEL_TAG = "xgboost"
         args = [model, MODEL_TAG, data, X_train, y_train, X_valid, y_valid]
         logs = mlflow_default_logging(*args)
+
+        # Logging feature pipe, use pudo
+        mlflow.log_param("pudo", pudo)
         mlflow.sklearn.log_model(feature_pipe, "feature_pipe")
 
     return logs["rmse_valid"]
 
 
-def objective(trial, pudo: bool):
+def objective(trial):
     # fmt: off
     params = {
         "max_depth":        trial.suggest_int("max_depth", 4, 100),
@@ -61,15 +64,11 @@ def objective(trial, pudo: bool):
         "seed": 42,
     }
 
-    return run(params, pudo)
+    return run(params, pudo=trial.suggest_categorical("pudo", [0, 1]))
 
 
 if __name__ == "__main__":
     import sys
-    from functools import partial
-
-    N_TRIALS = int(sys.argv[1])
-    USE_PUDO = int(sys.argv[2])
 
     study = optuna.create_study(direction="minimize")
-    study.optimize(partial(objective, pudo=USE_PUDO), n_trials=N_TRIALS)
+    study.optimize(objective, n_trials=int(sys.argv[1]))

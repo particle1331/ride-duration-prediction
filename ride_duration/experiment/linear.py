@@ -29,6 +29,6 @@ with mlflow.start_run():
     model = LinearRegression()
     model.fit(X_train, y_train)
 
-    # Compute metrics
+    # MLflow logging
     MODEL_TAG = "linear"
     mlflow_default_logging(model, MODEL_TAG, data, X_train, y_train, X_valid, y_valid)

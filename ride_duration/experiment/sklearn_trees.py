@@ -37,7 +37,7 @@ def run(model_class):
         model = model_class()
         model.fit(X_train, y_train)
 
-        # Default logging
+        # MLflow logging (default + feature pipe)
         MODEL_TAG = model_class.__name__
         args = [model, MODEL_TAG, data, X_train, y_train, X_valid, y_valid]
         mlflow_default_logging(*args)
