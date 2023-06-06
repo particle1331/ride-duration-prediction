@@ -54,12 +54,11 @@ def run(params: dict, pudo: int):
 
 
 def objective(trial):
-    # fmt: off
     params = {
-        "max_depth":        trial.suggest_int("max_depth", 4, 100),
-        "n_estimators":     trial.suggest_int("n_estimators", 1, 10, step=1) * 100,
-        "learning_rate":    trial.suggest_float("learning_rate", 1e-3, 1, log=True),
-        "min_child_weight": trial.suggest_float("min_child_weight", 0.1, 1000, log=True),
+        "max_depth": trial.suggest_int("max_depth", 4, 100),
+        "n_estimators": trial.suggest_int("n_estimators", 1, 10, step=1) * 100,
+        "learning_rate": trial.suggest_float("learning_rate", 1e-3, 1, log=True),
+        "min_child_weight": trial.suggest_float("min_child_weight", 0.1, 300, log=True),
         "objective": "reg:squarederror",
         "seed": 42,
     }
